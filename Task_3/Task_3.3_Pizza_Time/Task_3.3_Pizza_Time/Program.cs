@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace Task_3._3_Pizza_Time
@@ -14,6 +16,7 @@ namespace Task_3._3_Pizza_Time
                 Console.WriteLine("------------------------------------------");
                 Console.WriteLine("Type '1' to choose Task 3.3.1 \"Super Array\";");
                 Console.WriteLine("Type '2' to choose Task 3.3.2 \"Super String\";");
+                Console.WriteLine("Type '3' to choose Task 3.3.3 \"Pizza Time\";");
                 Console.WriteLine("Type 'exit' to go back to main menu.");
                 Console.Write("Choose option: ");
                 string selection = Console.ReadLine();
@@ -88,9 +91,31 @@ namespace Task_3._3_Pizza_Time
                         }
                     case "2":
                         {
-                            Console.WriteLine("You chose task 3.3.2 \"Super String\""); 
-                            Console.WriteLine();
+                            Console.WriteLine("You chose task 3.3.2 \"Super String\"" + Environment.NewLine);
                             SuperString.StringDisplay();
+                            break;
+                        }
+                    case "3":
+                        {
+                            Console.Write("You chose task 3.3.3 \"Pizza Time\"" + Environment.NewLine);
+                            Console.WriteLine("Input your name, pizza and its size:");
+                            Console.Write("Name: ");
+                            var name = Console.ReadLine();
+                            Console.Write("Name of pizza: ");
+                            var pizzaType = Console.ReadLine();
+                            Console.Write("Size: ");
+                            var size = Console.ReadLine();
+                            //Get clients` name for order notification
+                            var client = new Client { Name = name };
+                            //Setting input parameters for the order
+                            var pizza = new Pizza { Name = pizzaType, Price = pizzaType.Length * size.Length * 10 };
+
+                            var restoraunt = new Restaurant();
+
+                            restoraunt.Creation += (client, pizza) => Console.WriteLine($"{pizza.Name} for {pizza.Price} is ready. {client.Name}, please, take your order.");
+
+                            restoraunt.OrderMaking(client, pizza);
+
                             break;
                         }
                     case "exit":
@@ -105,7 +130,7 @@ namespace Task_3._3_Pizza_Time
             }
 
 
-            
+
         }
     }
 }
